@@ -2,14 +2,14 @@
 #define SYSTEMOFPARTICALS_MISSILEBASE_H
 
 #include "engine.hpp"
+#include <utility>
 
-class MissileBase{
+class MissileBase : public InheritableEnableSharedFromThis<MissileBase>{
 public:
     MissileBase() = default;
-    virtual void UpdatePosition() = 0;
+    virtual void Update() = 0;
     virtual void Draw() = 0;
 protected:
-    Engine* engine;
 };
 
 #endif //SYSTEMOFPARTICALS_MISSILEBASE_H
