@@ -21,12 +21,13 @@ void Missile::Update(){
 
     auto currentPos = missile.getPosition();
 
-
+    // Расчет позиции обьекта с учетом гравитации
     auto PosX = currentPos.x + speed * time* cos(angle);
     auto PosY = currentPos.y + speed * time * sin(angle) + G * time * time / 2;
 
     missile.setPosition(PosX, PosY);
 
+    // Удалить обьект если вышел за границы экрана
     if( missile.getPosition().x > WINDOW_WIDTH || missile.getPosition().x < - missile.getRadius()*2 ||
     missile.getPosition().y < - missile.getRadius()*2 || missile.getPosition().y > WINDOW_HEIGHT / 4 * 3){
         engine->DeleteObject(shared_this<Missile>());
@@ -39,30 +40,37 @@ void Missile::Draw()
 }
 
 void Missile::Explosion() {
+
     srand(time(nullptr));
     auto NumOfSmallMissiles = rand()%3;
+    auto missileSpeed = speed  * sin(angle) + G * clock.getElapsedTime().asSeconds();
+
     for (int i = 0; i < NumOfSmallMissiles; ++i){
-        auto missileSpeed = speed  * sin(angle) + G * clock.getElapsedTime().asSeconds();
         double ang = (rand()%20-10)  * PI / 180;
+
         auto smallMissile = std::make_shared<SmallMissile>(
                 engine,
                 missileSpeed * 2,
                 sf::seconds(lifeExpectancy.asSeconds() / 2),
                 missile.getPosition(),
                 angle + ang);
+
         engine->AddDrawable(smallMissile);
     }
 
 
     auto NumOfPartacals = rand()%20 + 10;
+    float particalSpeed = speed * float(lifeExpectancy.asSeconds());
+
     for (int i = 0; i < NumOfPartacals; ++i) {
         double ang = (rand()%360-180)  * PI / 180;
-        float particalSpeed = speed * float(lifeExpectancy.asSeconds());
+
         auto partical = std::make_shared<Partical>(engine,
                      particalSpeed,
                      sf::seconds(lifeExpectancy.asSeconds() / 2 - 0.2),
                      missile.getPosition(),
                      ang);
+
         engine->AddDrawable(partical);
     }
     engine->DeleteObject(shared_this<Missile>());

@@ -3,7 +3,7 @@
 Partical::Partical(std::shared_ptr<Engine>  engine, float speed, sf::Time lifeExpectancy, sf::Vector2f position, float angle)
         :   engine(std::move(engine)), speed(speed), lifeExpectancy(lifeExpectancy), angle(angle)
 {
-    partical.setRadius(2.0f);
+    partical.setRadius(PARTICAL_RADIUS);
     partical.setPosition(position);
     partical.setFillColor(sf::Color::White);
 }
@@ -24,7 +24,7 @@ void Partical::Update() {
     partical.setPosition(PosX,PosY);
 
 
-
+    // Удалить обьект если вышел за границы экрана
     if(partical.getPosition().x > WINDOW_WIDTH || partical.getPosition().x < - partical.getRadius() * 2 ||
        partical.getPosition().y < - partical.getRadius() * 2 || partical.getPosition().y > (WINDOW_HEIGHT / 4 * 3)){
         engine->DeleteObject(shared_this<Partical>());

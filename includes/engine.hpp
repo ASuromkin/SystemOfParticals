@@ -15,6 +15,10 @@ const int ANTI_ALIASING_LEVEL = 8;
 
 const double PI = std::acos(-1);
 
+const float PODIUM_HEIGHT = 40.f;
+const float PODIUM_WIDTH = 20.f;
+
+
 class Engine : public InheritableEnableSharedFromThis<Engine> {
 public:
     Engine();

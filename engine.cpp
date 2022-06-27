@@ -18,8 +18,8 @@ Engine::Engine() {
     podium.setFillColor(sf::Color::Green);
 
     // Создание пушки
-    canon.setSize(sf::Vector2f(20, 40));
-    canon.setPosition(WINDOW_WIDTH/2 - 10, WINDOW_HEIGHT / 4 * 3 - 40);
+    canon.setSize(sf::Vector2f(PODIUM_WIDTH, PODIUM_HEIGHT));
+    canon.setPosition(WINDOW_WIDTH/2 - PODIUM_WIDTH / 2, WINDOW_HEIGHT / 4 * 3 - PODIUM_HEIGHT);
     canon.setFillColor(sf::Color::Red);
 }
 

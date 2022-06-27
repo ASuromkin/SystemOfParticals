@@ -3,6 +3,8 @@
 
 #include "missileBase.hpp"
 
+const float PARTICAL_RADIUS = 2.0f;
+
 class Partical : public MissileBase {
 public:
     Partical(std::shared_ptr<Engine>  engine, float speed, sf::Time lifeExpectancy, sf::Vector2f position, float angle);
